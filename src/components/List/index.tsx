@@ -15,6 +15,7 @@ import {
  }
 
 interface ListProps {
+  index: number;
   data: {
     id: string;
     title: string;
@@ -24,7 +25,7 @@ interface ListProps {
   }
 }
 
-export function List({ data }: ListProps) {
+export function List({ data, index: listIndex }: ListProps) {
   return (
     <ContainerList done={data.done}>
       <Header>
@@ -38,9 +39,11 @@ export function List({ data }: ListProps) {
       </Header>
 
       <ul>
-        {data.cards.map(card => (
+        {data.cards.map((card, index) => (
           <Card 
             key={card.id}
+            listIndex={listIndex}
+            index={index}
             data={card}
           />
         ))}

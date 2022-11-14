@@ -1,6 +1,12 @@
-import styled from 'styled-components'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
+import styled, { css } from 'styled-components'
 
-export const ContainerCard = styled.div`
+interface ContainerCardProps extends ComponentPropsWithoutRef<"div"> {
+  isDragging?: boolean;
+  
+}
+
+export const ContainerCard = styled.div<ContainerCardProps>`
   position: relative;
   background: ${props => props.theme.white};
   border-radius: 5px;
@@ -27,6 +33,19 @@ export const ContainerCard = styled.div`
     border-radius: 2px;
     margin-top: 5px;
   }
+
+  ${props => props.isDragging && css`
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    padding-top: 31px;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: grabbing;
+
+    p, img, header {
+      opacity: 0;
+    }
+  `}
 `
 
 interface LabelProps {
